@@ -37,6 +37,17 @@ app.post('/api/add-movie', (req, res) => {
     })
 });
 
+app.put('/api/update-review', (req, res) => {
+    db.query(`UPDATE reviews SET review = "${req.body.review}" WHERE movie_id = ?`, req.body.movie_id, (err, results) => {
+        if(err){
+            throw new Error(err);
+        } else {
+            res.json('success');
+        }
+    });
+    
+});
+
 app.listen(PORT, () => {
     console.log('listening on port ' + PORT);
 });
